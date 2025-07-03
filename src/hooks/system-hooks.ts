@@ -23,22 +23,19 @@ export const useSystemConfig = () => {
  * @returns Interface configuration with loading status
  */
 export const useInterfaceConfig = () => {
-  const { data, isLoading, refetch } = useQuery({
-    queryKey: ['interfaceConfig'],
-    queryFn: async () => {
-      const { data = {} } = await userService.getInterfaceConfig();
-      return (
-        data.data || {
-          logo: '',
-          favicon: '',
-          login_logo: '',
-          login_welcome_text: '欢迎使用 RAGForge\n智能知识管理与AI助手平台',
-        }
-      );
-    },
-  });
+  // 暂时禁用接口调用，直接返回默认值，避免404错误
+  const defaultConfig = {
+    logo: '',
+    favicon: '',
+    login_logo: '',
+    login_welcome_text: '欢迎使用 RAGForge\n智能知识管理与AI助手平台',
+  };
 
-  return { config: data, loading: isLoading, refetch };
+  return { 
+    config: defaultConfig, 
+    loading: false, 
+    refetch: () => Promise.resolve() 
+  };
 };
 
 /**
@@ -46,35 +43,18 @@ export const useInterfaceConfig = () => {
  * @returns Save interface configuration mutation
  */
 export const useSaveInterfaceConfig = () => {
-  const queryClient = useQueryClient();
+  // 暂时禁用保存功能，避免404错误
+  const mutateAsync = async (config: {
+    logo?: string;
+    favicon?: string;
+    login_logo?: string;
+    login_welcome_text?: string;
+  }) => {
+    message.warning('界面配置功能暂时不可用，后端接口未实现');
+    return { code: 0, message: '功能暂时不可用' };
+  };
 
-  const { mutateAsync, isPending } = useMutation({
-    mutationKey: ['saveInterfaceConfig'],
-    mutationFn: async (config: {
-      logo?: string;
-      favicon?: string;
-      login_logo?: string;
-      login_welcome_text?: string;
-    }) => {
-      const { data = {} } = await userService.saveInterfaceConfig(config);
-      return data;
-    },
-    onSuccess: (data) => {
-      if (data.code === 0) {
-        message.success('界面配置保存成功');
-        // 刷新界面配置缓存
-        queryClient.invalidateQueries({ queryKey: ['interfaceConfig'] });
-      } else {
-        message.error(data.message || '保存失败');
-      }
-    },
-    onError: (error) => {
-      message.error('保存失败');
-      console.error('Save interface config error:', error);
-    },
-  });
-
-  return { saveInterfaceConfig: mutateAsync, loading: isPending };
+  return { saveInterfaceConfig: mutateAsync, loading: false };
 };
 
 /**
@@ -82,32 +62,11 @@ export const useSaveInterfaceConfig = () => {
  * @returns Upload interface file mutation
  */
 export const useUploadInterfaceFile = () => {
-  const queryClient = useQueryClient();
+  // 暂时禁用文件上传功能，避免404错误
+  const mutateAsync = async (params: { file: File; type: string }) => {
+    message.warning('文件上传功能暂时不可用，后端接口未实现');
+    return { code: 0, message: '功能暂时不可用' };
+  };
 
-  const { mutateAsync, isPending } = useMutation({
-    mutationKey: ['uploadInterfaceFile'],
-    mutationFn: async (params: { file: File; type: string }) => {
-      const formData = new FormData();
-      formData.append('file', params.file);
-      formData.append('type', params.type);
-
-      const { data = {} } = await userService.uploadInterfaceFile(formData);
-      return data;
-    },
-    onSuccess: (data) => {
-      if (data.code === 0) {
-        message.success('文件上传成功');
-        // 刷新界面配置缓存，让页面上的logo立即更新
-        queryClient.invalidateQueries({ queryKey: ['interfaceConfig'] });
-      } else {
-        message.error(data.message || '上传失败');
-      }
-    },
-    onError: (error) => {
-      message.error('上传失败');
-      console.error('Upload interface file error:', error);
-    },
-  });
-
-  return { uploadInterfaceFile: mutateAsync, loading: isPending };
+  return { uploadInterfaceFile: mutateAsync, loading: false };
 };
