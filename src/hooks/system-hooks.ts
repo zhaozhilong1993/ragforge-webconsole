@@ -32,7 +32,7 @@ export const useInterfaceConfig = () => {
           logo: '',
           favicon: '',
           login_logo: '',
-          login_welcome_text: '欢迎使用 RAGFlow\n智能知识管理与AI助手平台',
+          login_welcome_text: '欢迎使用 RAGForge\n智能知识管理与AI助手平台',
         }
       );
     },

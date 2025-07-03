@@ -13,7 +13,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { RAGFlowSelect } from '@/components/ui/select';
+import { RAGForgeSelect } from '@/components/ui/select';
 import { FileMimeType, Platform } from '@/constants/common';
 import { IModalProps } from '@/interfaces/common';
 import { TagRenameId } from '@/pages/add-knowledge/constant';
@@ -35,7 +35,7 @@ export function UploadAgentForm({ hideModal, onOk }: IModalProps<any>) {
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-    defaultValues: { platform: Platform.RAGFlow },
+    defaultValues: { platform: Platform.RAGForge },
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
@@ -79,7 +79,7 @@ export function UploadAgentForm({ hideModal, onOk }: IModalProps<any>) {
             <FormItem>
               <FormLabel>{t('common.name')}</FormLabel>
               <FormControl>
-                <RAGFlowSelect {...field} options={options} />
+                <RAGForgeSelect {...field} options={options} />
               </FormControl>
               <FormMessage />
             </FormItem>

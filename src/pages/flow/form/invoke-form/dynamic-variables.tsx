@@ -1,6 +1,6 @@
 import { EditableCell, EditableRow } from '@/components/editable-cell';
 import { useTranslate } from '@/hooks/common-hooks';
-import { RAGFlowNodeType } from '@/interfaces/database/flow';
+import { RAGForgeNodeType } from '@/interfaces/database/flow';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Button, Collapse, Flex, Input, Select, Table, TableProps } from 'antd';
 import { trim } from 'lodash';
@@ -10,7 +10,7 @@ import { useHandleOperateParameters } from './hooks';
 import styles from './index.less';
 
 interface IProps {
-  node?: RAGFlowNodeType;
+  node?: RAGForgeNodeType;
 }
 
 const components = {

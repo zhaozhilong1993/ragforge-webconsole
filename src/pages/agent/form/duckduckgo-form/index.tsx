@@ -7,7 +7,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { RAGFlowSelect } from '@/components/ui/select';
+import { RAGForgeSelect } from '@/components/ui/select';
 import { useTranslate } from '@/hooks/common-hooks';
 import { useMemo } from 'react';
 import { Channel } from '../../constant';
@@ -38,7 +38,7 @@ const DuckDuckGoForm = ({ form, node }: INextOperatorForm) => {
             <FormItem>
               <FormLabel tooltip={t('channelTip')}>{t('channel')}</FormLabel>
               <FormControl>
-                <RAGFlowSelect {...field} options={options} />
+                <RAGForgeSelect {...field} options={options} />
               </FormControl>
               <FormMessage />
             </FormItem>

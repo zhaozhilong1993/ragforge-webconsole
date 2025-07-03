@@ -107,10 +107,10 @@ export default {
       processDuration: 'Duração',
       progressMsg: 'Progresso',
       testingDescription:
-        'Realize um teste de recuperação para verificar se o RAGFlow pode recuperar o conteúdo pretendido para o LLM. Por favor, note que as alterações feitas aqui não são salvas automaticamente. Se você ajustar as configurações padrão aqui, como o peso de similaridade de palavras-chave, certifique-se de atualizar as configurações relacionadas de forma sincronizada nas configurações do assistente de chat ou nas configurações do operador de recuperação.',
+        'Realize um teste de recuperação para verificar se o RAGForge pode recuperar o conteúdo pretendido para o LLM. Por favor, note que as alterações feitas aqui não são salvas automaticamente. Se você ajustar as configurações padrão aqui, como o peso de similaridade de palavras-chave, certifique-se de atualizar as configurações relacionadas de forma sincronizada nas configurações do assistente de chat ou nas configurações do operador de recuperação.',
       similarityThreshold: 'Limite de similaridade',
       similarityThresholdTip:
-        'O RAGFlow emprega uma combinação de similaridade de palavras-chave ponderada e similaridade de cosseno vetorial ponderada, ou uma combinação de similaridade de palavras-chave ponderada e pontuação de reranking ponderada durante a recuperação. Este parâmetro define o limite para similaridades entre a consulta do usuário e os fragmentos. Qualquer fragmento com uma pontuação de similaridade abaixo deste limite será excluído dos resultados. Por padrão, o limite é definido como 0,2. Isso significa que apenas os trechos com uma pontuação de similaridade híbrida de 20 ou mais serão recuperados.',
+        'O RAGForge emprega uma combinação de similaridade de palavras-chave ponderada e similaridade de cosseno vetorial ponderada, ou uma combinação de similaridade de palavras-chave ponderada e pontuação de reranking ponderada durante a recuperação. Este parâmetro define o limite para similaridades entre a consulta do usuário e os fragmentos. Qualquer fragmento com uma pontuação de similaridade abaixo deste limite será excluído dos resultados. Por padrão, o limite é definido como 0,2. Isso significa que apenas os trechos com uma pontuação de similaridade híbrida de 20 ou mais serão recuperados.',
       vectorSimilarityWeight: 'Peso da similaridade de palavras-chave',
       vectorSimilarityWeightTip:
         'Define o peso da similaridade de palavras-chave na pontuação de similaridade combinada, usada com a similaridade de cosseno vetorial ou com a pontuação de reranking. O total dos dois pesos deve ser igual a 1.0.',
@@ -159,7 +159,7 @@ export default {
       rerankModel: 'Modelo de reranking',
       rerankPlaceholder: 'Por favor, selecione',
       rerankTip:
-        'Se deixado vazio, o RAGFlow usará uma combinação de similaridade de palavras-chave ponderada e similaridade de cosseno vetorial ponderada; se um modelo de reranking for selecionado, uma pontuação de reranking ponderada substituirá a similaridade de cosseno vetorial ponderada. Esteja ciente de que usar um modelo de reranking aumentará significativamente o tempo de resposta do sistema.',
+        'Se deixado vazio, o RAGForge usará uma combinação de similaridade de palavras-chave ponderada e similaridade de cosseno vetorial ponderada; se um modelo de reranking for selecionado, uma pontuação de reranking ponderada substituirá a similaridade de cosseno vetorial ponderada. Esteja ciente de que usar um modelo de reranking aumentará significativamente o tempo de resposta do sistema.',
       topK: 'Top-K',
       topKTip:
         'Usado em conjunto com o Rerank model, essa configuração define o número de trechos de texto a serem enviados ao modelo reranking especificado.',
@@ -283,7 +283,7 @@ export default {
       entityTypes: 'Tipos de entidades',
       vietnamese: 'Vietnamita',
       pageRank: 'Ranking de páginas',
-      pageRankTip: `Você pode atribuir uma pontuação PageRank mais alta a bases de conhecimento específicas durante a recuperação. A pontuação correspondente é adicionada às pontuações de similaridade híbrida dos fragmentos recuperados dessas bases de conhecimento, aumentando sua classificação. Veja https://ragflow.io/docs/dev/set_page_rank para mais detalhes.`,
+      pageRankTip: `Você pode atribuir uma pontuação PageRank mais alta a bases de conhecimento específicas durante a recuperação. A pontuação correspondente é adicionada às pontuações de similaridade híbrida dos fragmentos recuperados dessas bases de conhecimento, aumentando sua classificação. Veja https://ragforge.io/docs/dev/set_page_rank para mais detalhes.`,
       tagName: 'Etiqueta',
       frequency: 'Frequência',
       searchTags: 'Pesquisar etiquetas',
@@ -300,7 +300,7 @@ export default {
         <li>É necessário enviar conjuntos de etiquetas com exemplos antes de usá-los.</li>
         <li>Palavras-chave são geradas pelo LLM, o que é caro e demorado.</li>
       </ul>
-      <p>Consulte https://ragflow.io/docs/dev/use_tag_sets para obter detalhes.</p>`,
+      <p>Consulte https://ragforge.io/docs/dev/use_tag_sets para obter detalhes.</p>`,
       topnTags: 'Top-N Etiquetas',
       tags: 'Etiquetas',
       addTag: 'Adicionar etiqueta',
@@ -364,7 +364,7 @@ export default {
       topN: 'Top N',
       topNTip: `Nem todos os fragmentos com pontuação de similaridade acima do 'limiar de similaridade' serão enviados ao LLM. Isso seleciona os 'Top N' fragmentos recuperados.`,
       variable: 'Variável',
-      variableTip: `Usados em conjunto com as APIs de gerenciamento de assistente de bate-papo do RAGFlow, as variáveis podem ajudar a desenvolver estratégias de prompt do sistema mais flexíveis. As variáveis definidas serão usadas pelo 'Prompt do sistema' como parte dos prompts para o LLM. {knowledge} é uma variável especial reservada que representa partes recuperadas de base(s) de conhecimento especificada(s), e todas as variáveis devem ser cercadas por chaves {} no 'Prompt do sistema'. Veja https://ragflow.io/docs/dev/set_chat_variables para mais detalhes.`,
+      variableTip: `Usados em conjunto com as APIs de gerenciamento de assistente de bate-papo do RAGForge, as variáveis podem ajudar a desenvolver estratégias de prompt do sistema mais flexíveis. As variáveis definidas serão usadas pelo 'Prompt do sistema' como parte dos prompts para o LLM. {knowledge} é uma variável especial reservada que representa partes recuperadas de base(s) de conhecimento especificada(s), e todas as variáveis devem ser cercadas por chaves {} no 'Prompt do sistema'. Veja https://ragforge.io/docs/dev/set_chat_variables para mais detalhes.`,
       add: 'Adicionar',
       key: 'Chave',
       optional: 'Opcional',
@@ -428,7 +428,7 @@ export default {
       extensionTitle: 'Extensão do Chrome',
       tokenError: 'Por favor, crie uma chave API primeiro.',
       betaError:
-        'Por favor, adquira uma chave API do RAGFlow na página Configurações do Sistema primeiro.',
+        'Por favor, adquira uma chave API do RAGForge na página Configurações do Sistema primeiro.',
       searching: 'Pesquisando...',
       parsing: 'Analisando',
       uploading: 'Carregando',
@@ -506,19 +506,19 @@ export default {
         'O modelo LLM padrão que todos os novos bancos de conhecimento usarão.',
       embeddingModel: 'Modelo de incorporação',
       embeddingModelTip:
-        'O modelo de incorporação padrão para cada nova base de conhecimento criada. Se você não encontrar um modelo de incorporação na lista suspensa, verifique se está usando a edição slim do RAGFlow (que não inclui modelos de incorporação) ou consulte https://ragflow.io/docs/dev/supported_models para verificar se o provedor do modelo suporta este modelo.',
+        'O modelo de incorporação padrão para cada nova base de conhecimento criada. Se você não encontrar um modelo de incorporação na lista suspensa, verifique se está usando a edição slim do RAGForge (que não inclui modelos de incorporação) ou consulte https://ragforge.io/docs/dev/supported_models para verificar se o provedor do modelo suporta este modelo.',
       img2txtModel: 'Modelo Img2Txt',
       img2txtModelTip:
-        'O modelo padrão img2txt para cada base de conhecimento recém-criada. Ele descreve uma imagem ou vídeo. Se você não conseguir encontrar um modelo no menu suspenso, verifique https://ragflow.io/docs/dev/supported_models para ver se seu provedor de modelo suporta este modelo.',
+        'O modelo padrão img2txt para cada base de conhecimento recém-criada. Ele descreve uma imagem ou vídeo. Se você não conseguir encontrar um modelo no menu suspenso, verifique https://ragforge.io/docs/dev/supported_models para ver se seu provedor de modelo suporta este modelo.',
       sequence2txtModel: 'Modelo Speech2Txt',
       sequence2txtModelTip:
-        'O modelo ASR padrão que todos os novos bancos de conhecimento usarão. Use este modelo para converter vozes em texto correspondente. Se você não conseguir encontrar um modelo no menu suspenso, verifique https://ragflow.io/docs/dev/supported_models para ver se seu provedor de modelo suporta este modelo.',
+        'O modelo ASR padrão que todos os novos bancos de conhecimento usarão. Use este modelo para converter vozes em texto correspondente. Se você não conseguir encontrar um modelo no menu suspenso, verifique https://ragforge.io/docs/dev/supported_models para ver se seu provedor de modelo suporta este modelo.',
       rerankModel: 'Modelo de Reordenação',
       rerankModelTip:
-        'O modelo de rerank padrão para reranking de trechos. Se você não encontrar um modelo no menu suspenso, verifique https://ragflow.io/docs/dev/supported_models para ver se o seu provedor de modelo oferece suporte a este modelo.',
+        'O modelo de rerank padrão para reranking de trechos. Se você não encontrar um modelo no menu suspenso, verifique https://ragforge.io/docs/dev/supported_models para ver se o seu provedor de modelo oferece suporte a este modelo.',
       ttsModel: 'Modelo TTS',
       ttsModelTip:
-        'O modelo padrão de text-to-speech. Se você não encontrar um modelo no menu suspenso, verifique https://ragflow.io/docs/dev/supported_models para ver se o seu provedor de modelo oferece suporte a este modelo.',
+        'O modelo padrão de text-to-speech. Se você não encontrar um modelo no menu suspenso, verifique https://ragforge.io/docs/dev/supported_models para ver se o seu provedor de modelo oferece suporte a este modelo.',
       workspace: 'Área de trabalho',
       upgrade: 'Atualizar',
       addLlmTitle: 'Adicionar LLM',
@@ -649,13 +649,13 @@ export default {
       uploadTitle:
         'Clique ou arraste o arquivo para esta área para fazer o upload',
       uploadDescription:
-        'O RAGFlow suporta o upload de arquivos de forma individual ou em lote. Para o RAGFlow implantado localmente: o limite total de tamanho de arquivo por upload é de 1GB, com um limite de upload em lote de 32 arquivos. Não há limite para o número total de arquivos por conta. Para o demo.ragflow.io: o limite total de tamanho de arquivo por upload é de 10MB, com cada arquivo não excedendo 10MB e um máximo de 128 arquivos por conta.',
+        'O RAGForge suporta o upload de arquivos de forma individual ou em lote. Para o RAGForge implantado localmente: o limite total de tamanho de arquivo por upload é de 1GB, com um limite de upload em lote de 32 arquivos. Não há limite para o número total de arquivos por conta. Para o demo.ragforge.io: o limite total de tamanho de arquivo por upload é de 10MB, com cada arquivo não excedendo 10MB e um máximo de 128 arquivos por conta.',
       local: 'Uploads locais',
       s3: 'Uploads S3',
       preview: 'Pré-visualização',
       fileError: 'Erro no arquivo',
       uploadLimit:
-        'O RAGFlow suporta o upload de arquivos de forma individual ou em lote. Para o RAGFlow implantado localmente: o limite total de tamanho de arquivo por upload é de 1GB, com um limite de upload em lote de 32 arquivos. Não há limite para o número total de arquivos por conta. Para o demo.ragflow.io: o limite total de tamanho de arquivo por upload é de 10MB, com cada arquivo não excedendo 10MB e um máximo de 128 arquivos por conta.',
+        'O RAGForge suporta o upload de arquivos de forma individual ou em lote. Para o RAGForge implantado localmente: o limite total de tamanho de arquivo por upload é de 1GB, com um limite de upload em lote de 32 arquivos. Não há limite para o número total de arquivos por conta. Para o demo.ragforge.io: o limite total de tamanho de arquivo por upload é de 10MB, com cada arquivo não excedendo 10MB e um máximo de 128 arquivos por conta.',
       destinationFolder: 'Pasta de destino',
     },
     flow: {

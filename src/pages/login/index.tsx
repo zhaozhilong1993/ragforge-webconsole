@@ -63,8 +63,8 @@ const Login = () => {
   const loginLogoUrl = interfaceConfig?.login_logo || logoWithText;
   const welcomeText =
     interfaceConfig?.login_welcome_text ||
-    '欢迎使用 RAGFlow\n智能知识管理与AI助手平台';
-  const loginTitle = interfaceConfig?.login_title || '欢迎使用 RAGFlow';
+    '欢迎使用 RAGForge\n智能知识管理与AI助手平台';
+  const loginTitle = interfaceConfig?.login_title || '欢迎使用 RAGForge';
 
   return (
     <div className={styles.loginRoot}>

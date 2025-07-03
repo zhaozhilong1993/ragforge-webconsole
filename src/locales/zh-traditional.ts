@@ -151,7 +151,7 @@ export default {
       changeSpecificCategory: '更改特定類別',
       uploadTitle: '點擊或拖拽文件至此區域即可上傳',
       uploadDescription:
-        '支持單次或批量上傳。本地部署的單次上傳檔案總大小上限為 1GB，單次批量上傳檔案數不超過 32，單個帳戶不限檔案數量。對於 demo.ragflow.io，每次上傳的文件總大小限制為 10MB，每個文件不得超過 10MB，且每個帳戶最多可上傳 128 個文件。',
+        '支持單次或批量上傳。本地部署的單次上傳檔案總大小上限為 1GB，單次批量上傳檔案數不超過 32，單個帳戶不限檔案數量。對於 demo.ragforge.io，每次上傳的文件總大小限制為 10MB，每個文件不得超過 10MB，且每個帳戶最多可上傳 128 個文件。',
       chunk: '解析塊',
       bulk: '批量',
       cancel: '取消',
@@ -280,7 +280,7 @@ export default {
         簡歷有多種格式，就像一個人的個性一樣，但我們經常必須將它們組織成結構化數據，以便於搜索。
         </p><p>
         我們不是將簡歷分塊，而是將簡歷解析為結構化數據。作為HR，你可以扔掉所有的簡歷，
-        您只需與<i>'ragflow'</i>交談即可列出所有符合資格的候選人。
+        您只需與<i>'ragforge'</i>交談即可列出所有符合資格的候選人。
         </p>
           `,
       table: `支持<p><b>XLSX</b>和<b>csv/txt</b>格式文件。</p><p>以下是一些提示： <ul> <li>对于Csv或Txt文件，列之间的分隔符为 <em><b>tab</b></em>。</li> <li>第一行必须是列标题。</li> <li>列标题必须是有意义的术语，以便我们的大語言模型能够理解。列举一些同义词时最好使用斜杠<i>'/'</i>来分隔，甚至更好使用方括号枚举值，例如 <i>"性別/性別（男性，女性）"</i>.<p>以下是标题的一些示例：<ol> <li>供应商/供货商<b>'tab'</b>顏色（黃色、紅色、棕色）<b>'tab'</b>性別（男、女）<b>'tab'</B>尺码（m、l、xl、xxl）</li> <li>姓名/名字<b>'tab'</b>電話/手機/微信<b>'tab'</b>最高学历（高中，职高，硕士，本科，博士，初中，中技，中专，专科，专升本，mpa，mba，emba）</li> </ol> </p> </li> <li>表中的每一行都将被视为一个块。</li> </ul>`,
@@ -336,7 +336,7 @@ export default {
       maxClusterTip: '最大聚類數。',
       entityTypes: '實體類型',
       pageRank: '頁面排名',
-      pageRankTip: `知識庫檢索時，你可以為特定知識庫設置較高的 PageRank 分數，該知識庫中匹配文本塊的混合相似度得分會自動疊加 PageRank 分數，從而提升排序權重。詳見 https://ragflow.io/docs/dev/set_page_rank。`,
+      pageRankTip: `知識庫檢索時，你可以為特定知識庫設置較高的 PageRank 分數，該知識庫中匹配文本塊的混合相似度得分會自動疊加 PageRank 分數，從而提升排序權重。詳見 https://ragforge.io/docs/dev/set_page_rank。`,
       tagName: '標籤',
       frequency: '頻次',
       searchTags: '搜尋標籤',
@@ -354,13 +354,13 @@ export default {
         <li>在給你的知識庫文本塊批量打標籤之前，你需要先生成標籤集作為樣本。</li>
         <li>自動關鍵詞功能中的關鍵詞由 LLM 生成，此過程相對耗時，並且會產生一定的 Token 消耗。</li>
       </ul>
-      <p>詳情請參閱 https://ragflow.io/docs/dev/use_tag_sets。</p>
+      <p>詳情請參閱 https://ragforge.io/docs/dev/use_tag_sets。</p>
  `,
       tags: '標籤',
       addTag: '增加標籤',
       useGraphRag: '提取知識圖譜',
       useGraphRagTip:
-        '基於知識庫內所有切好的文本塊構建知識圖譜，用以提升多跳和複雜問題回答的正確率。請注意：構建知識圖譜將消耗大量 token 和時間。詳見 https://ragflow.io/docs/dev/construct_knowledge_graph。',
+        '基於知識庫內所有切好的文本塊構建知識圖譜，用以提升多跳和複雜問題回答的正確率。請注意：構建知識圖譜將消耗大量 token 和時間。詳見 https://ragforge.io/docs/dev/construct_knowledge_graph。',
       graphRagMethod: '方法',
       graphRagMethodTip: `Light：實體和關係提取提示來自 GitHub - HKUDS/LightRAG："LightRAG：簡單快速的檢索增強生成"<br>
  一般：實體和關係擷取提示來自 GitHub - microsoft/graphrag：基於模組化圖形的檢索增強生成 (RAG) 系統，`,
@@ -430,7 +430,7 @@ export default {
       variable: '變量',
       variableTip: `你可以透過對話 API，並配合變數設定來動態調整大模型的系統提示詞。
       {knowledge}為系統預留變數，代表從指定知識庫召回的文本塊。
-     「系統提示詞」中的所有變數都必須用大括號{}括起來。詳見 https://ragflow.io/docs/dev/set_chat_variables。`,
+     「系統提示詞」中的所有變數都必須用大括號{}括起來。詳見 https://ragforge.io/docs/dev/set_chat_variables。`,
       add: '新增',
       key: '關鍵字',
       optional: '可選的',
@@ -580,18 +580,18 @@ export default {
       chatModelTip: '所有新創建的知識庫都會使用默認的聊天模型。',
       ttsModel: '語音合成模型',
       ttsModelTip:
-        '默認的tts模型會被用於在對話過程中請求語音生成時使用。如未显示可选模型，请根据 https://ragflow.io/docs/dev/supported_models 确认你的模型供应商是否提供该模型。',
+        '默認的tts模型會被用於在對話過程中請求語音生成時使用。如未显示可选模型，请根据 https://ragforge.io/docs/dev/supported_models 确认你的模型供应商是否提供该模型。',
       embeddingModel: '嵌入模型',
       embeddingModelTip:
-        '如未顯示可選模型，請檢查你是否在使用 RAGFlow slim 版（不含嵌入模型）；或根據 https://ragflow.io/docs/dev/supported_models 確認你的模型供應商是否提供該模型。',
+        '如未顯示可選模型，請檢查你是否在使用 RAGForge slim 版（不含嵌入模型）；或根據 https://ragforge.io/docs/dev/supported_models 確認你的模型供應商是否提供該模型。',
       img2txtModel: 'img2Txt模型',
       img2txtModelTip:
-        '所有新創建的知識庫都將使用默認的 img2txt 模型。它可以描述圖片或視頻。如未顯示可選模型，請根據 https://ragflow.io/docs/dev/supported_models 確認你的模型供應商是否提供該模型。',
+        '所有新創建的知識庫都將使用默認的 img2txt 模型。它可以描述圖片或視頻。如未顯示可選模型，請根據 https://ragforge.io/docs/dev/supported_models 確認你的模型供應商是否提供該模型。',
       sequence2txtModel: 'speech2Txt模型',
       sequence2txtModelTip:
-        '所有新創建的知識庫都將使用默認的 ASR 模型。使用此模型將語音翻譯為相應的文本。如未顯示可選模型，請根據 https://ragflow.io/docs/dev/supported_models 確認你的模型供應商是否提供該模型。',
+        '所有新創建的知識庫都將使用默認的 ASR 模型。使用此模型將語音翻譯為相應的文本。如未顯示可選模型，請根據 https://ragforge.io/docs/dev/supported_models 確認你的模型供應商是否提供該模型。',
       rerankModel: 'rerank模型',
-      rerankModelTip: `默認的 reranking 模型。如未顯示可選模型，請根據 https://ragflow.io/docs/dev/supported_models 確認你的模型供應商是否提供該模型。`,
+      rerankModelTip: `默認的 reranking 模型。如未顯示可選模型，請根據 https://ragforge.io/docs/dev/supported_models 確認你的模型供應商是否提供該模型。`,
       workspace: '工作空間',
       upgrade: '升級',
       addLlmTitle: '添加Llm',
@@ -733,7 +733,7 @@ export default {
       parseOnCreation: '創建時解析',
       uploadTitle: '點擊或拖拽文件至此區域即可上傳',
       uploadDescription:
-        '支持單次或批量上傳。本地部署的單次上傳檔案總大小上限為 1GB，單次批量上傳檔案數不超過 32，單個帳戶不限檔案數量。對於 demo.ragflow.io，每次上傳的文件總大小限制為 10MB，每個文件不得超過 10MB，且每個帳戶最多可上傳 128 個文件。',
+        '支持單次或批量上傳。本地部署的單次上傳檔案總大小上限為 1GB，單次批量上傳檔案數不超過 32，單個帳戶不限檔案數量。對於 demo.ragforge.io，每次上傳的文件總大小限制為 10MB，每個文件不得超過 10MB，且每個帳戶最多可上傳 128 個文件。',
       file: '文件',
       directory: '文件夾',
       local: '本地上傳',

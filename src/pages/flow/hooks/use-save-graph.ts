@@ -1,5 +1,5 @@
 import { useFetchFlow, useResetFlow, useSetFlow } from '@/hooks/flow-hooks';
-import { RAGFlowNodeType } from '@/interfaces/database/flow';
+import { RAGForgeNodeType } from '@/interfaces/database/flow';
 import { useDebounceEffect } from 'ahooks';
 import dayjs from 'dayjs';
 import { useCallback, useEffect, useState } from 'react';
@@ -14,7 +14,7 @@ export const useSaveGraph = () => {
   const { buildDslData } = useBuildDslData();
 
   const saveGraph = useCallback(
-    async (currentNodes?: RAGFlowNodeType[]) => {
+    async (currentNodes?: RAGForgeNodeType[]) => {
       return setFlow({
         id,
         title: data.title,
@@ -32,7 +32,7 @@ export const useSaveGraphBeforeOpeningDebugDrawer = (show: () => void) => {
   const { resetFlow } = useResetFlow();
 
   const handleRun = useCallback(
-    async (nextNodes?: RAGFlowNodeType[]) => {
+    async (nextNodes?: RAGForgeNodeType[]) => {
       const saveRet = await saveGraph(nextNodes);
       if (saveRet?.code === 0) {
         // Call the reset api before opening the run drawer each time

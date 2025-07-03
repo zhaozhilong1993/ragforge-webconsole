@@ -250,10 +250,10 @@ const InterfaceSettings = () => {
       );
       setWelcomeText(
         interfaceConfig.login_welcome_text ||
-          '欢迎使用 RAGFlow\n智能知识管理与AI助手平台',
+          '欢迎使用 RAGForge\n智能知识管理与AI助手平台',
       );
-      setAppName(interfaceConfig.app_name || 'RAGFlow');
-      setLoginTitle(interfaceConfig.login_title || '欢迎使用 RAGFlow');
+      setAppName(interfaceConfig.app_name || 'RAGForge');
+      setLoginTitle(interfaceConfig.login_title || '欢迎使用 RAGForge');
     }
   }, [interfaceConfig]);
 
@@ -376,7 +376,7 @@ const InterfaceSettings = () => {
               value={appName}
               onChange={(e) => setAppName(e.target.value)}
               style={{ maxWidth: 400 }}
-              placeholder="RAGFlow"
+              placeholder="RAGForge"
             />
             <Typography.Text type="secondary">
               显示在页面头部和浏览器标题中的应用名称
@@ -422,7 +422,7 @@ const InterfaceSettings = () => {
               value={welcomeText}
               onChange={(e) => setWelcomeText(e.target.value)}
               style={{ maxWidth: 400 }}
-              placeholder="欢迎使用 RAGFlow\n智能知识管理与AI助手平台"
+              placeholder="欢迎使用 RAGForge\n智能知识管理与AI助手平台"
             />
           </Col>
         </Row>
@@ -435,7 +435,7 @@ const InterfaceSettings = () => {
               value={loginTitle}
               onChange={(e) => setLoginTitle(e.target.value)}
               style={{ maxWidth: 400 }}
-              placeholder="欢迎使用 RAGFlow"
+              placeholder="欢迎使用 RAGForge"
             />
             <Typography.Text type="secondary">
               登录页面显示的主要标题

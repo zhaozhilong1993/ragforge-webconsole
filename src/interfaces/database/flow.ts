@@ -146,7 +146,7 @@ export type IIterationNode = BaseNode;
 export type IIterationStartNode = BaseNode;
 export type IKeywordNode = BaseNode;
 
-export type RAGFlowNodeType =
+export type RAGForgeNodeType =
   | IBeginNode
   | IRetrievalNode
   | IGenerateNode
@@ -166,6 +166,6 @@ export type RAGFlowNodeType =
   | IKeywordNode;
 
 export interface IGraph {
-  nodes: RAGFlowNodeType[];
+  nodes: RAGForgeNodeType[];
   edges: Edge[];
 }
