@@ -85,15 +85,18 @@ const ChatConfigurationModal = ({
 
     const icon = await getBase64FromUploadFileList(values.icon);
 
+    const promptConfig = {
+      ...nextValues.prompt_config,
+      system: nextValues.prompt_config?.system || t('systemInitialValue'),
+      parameters: promptEngineRef.current,
+      empty_response: emptyResponse,
+    };
+
     const finalValues = {
       dialog_id: initialDialog.id,
       ...nextValues,
       vector_similarity_weight: 1 - nextValues.vector_similarity_weight,
-      prompt_config: {
-        ...nextValues.prompt_config,
-        parameters: promptEngineRef.current,
-        empty_response: emptyResponse,
-      },
+      prompt_config: promptConfig,
       icon,
     };
     onOk(finalValues);
@@ -132,8 +135,18 @@ const ChatConfigurationModal = ({
       if (icon) {
         fileList = [{ uid: '1', name: 'file', thumbUrl: icon, status: 'done' }];
       }
+      
+      // 为新建助手设置默认的prompt_config
+      const defaultPromptConfig = {
+        system: t('systemInitialValue'),
+        empty_response: '',
+        parameters: [],
+        prologue: t('setAnOpenerInitial'),
+      };
+      
       form.setFieldsValue({
         ...initialDialog,
+        prompt_config: initialDialog.prompt_config || defaultPromptConfig,
         llm_setting:
           initialDialog.llm_setting ??
           settledModelVariableMap[ModelVariableType.Precise],
@@ -143,7 +156,7 @@ const ChatConfigurationModal = ({
           1 - (initialDialog.vector_similarity_weight ?? 0.3),
       });
     }
-  }, [initialDialog, form, visible, modelId]);
+  }, [initialDialog, form, visible, modelId, t]);
 
   return (
     <Drawer
