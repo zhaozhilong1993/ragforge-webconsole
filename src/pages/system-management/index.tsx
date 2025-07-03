@@ -482,20 +482,14 @@ const LicenseSettings = () => {
 };
 
 const SystemManagementPage = () => {
-  const [selectedKey, setSelectedKey] = useState('ocr');
+  const [selectedKey, setSelectedKey] = useState('license');
 
   const renderContent = () => {
     switch (selectedKey) {
-      case 'ocr':
-        return <OcrSettings />;
-      case 'interface':
-        return <InterfaceSettings />;
       case 'license':
         return <LicenseSettings />;
-      case 'model':
-        return <ModelSettings />;
       default:
-        return <OcrSettings />;
+        return <LicenseSettings />;
     }
   };
 
@@ -508,12 +502,6 @@ const SystemManagementPage = () => {
           onClick={({ key }) => setSelectedKey(key)}
           style={{ height: '100%', borderRight: 0 }}
         >
-          <Menu.Item key="ocr" icon={<ScanOutlined />}>
-            OCR管理
-          </Menu.Item>
-          <Menu.Item key="interface" icon={<PictureOutlined />}>
-            界面管理
-          </Menu.Item>
           <Menu.Item key="license" icon={<SafetyCertificateOutlined />}>
             授权管理
           </Menu.Item>
