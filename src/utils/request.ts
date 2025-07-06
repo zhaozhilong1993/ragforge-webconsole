@@ -111,22 +111,37 @@ request.interceptors.response.use(async (response: Response, options) => {
   }
 
   const data: ResponseType = await response?.clone()?.json();
+  
+  // 检查是否是系统配置相关的API，使用多种方式检测
+  const requestUrl = options.url || '';
+  const responseUrl = response?.url || '';
+  const isSystemConfigAPI = requestUrl.includes('/system/interface/config') || 
+                           requestUrl.includes('/system/config') ||
+                           responseUrl.includes('/system/interface/config') || 
+                           responseUrl.includes('/system/config');
+  
   if (data?.code === 100) {
     message.error(data?.message);
   } else if (data?.code === 401) {
-    notification.error({
-      message: data?.message,
-      description: data?.message,
-      duration: 3,
-    });
+    // 对于系统配置API，401错误不显示通知，避免在登录页面显示错误
+    if (!isSystemConfigAPI) {
+      notification.error({
+        message: data?.message,
+        description: data?.message,
+        duration: 3,
+      });
+    }
     authorizationUtil.removeAll();
     redirectToLogin();
   } else if (data?.code !== 0) {
-    notification.error({
-      message: `${i18n.t('message.hint')} : ${data?.code}`,
-      description: data?.message,
-      duration: 3,
-    });
+    // 对于系统配置API，非0错误不显示通知
+    if (!isSystemConfigAPI) {
+      notification.error({
+        message: `${i18n.t('message.hint')} : ${data?.code}`,
+        description: data?.message,
+        duration: 3,
+      });
+    }
   }
   return response;
 });

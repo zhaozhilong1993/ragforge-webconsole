@@ -10,9 +10,30 @@ export const useSystemConfig = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['systemConfig'],
     queryFn: async () => {
-      const { data = {} } = await userService.getSystemConfig();
-      return data.data || { registerEnabled: 1 }; // Default to enabling registration
+      try {
+        // 直接使用 fetch 而不是 userService，避免触发错误通知
+        const response = await fetch('/v1/system/config', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        
+        if (response.ok) {
+          const { data = {} } = await response.json();
+          return data.data || { registerEnabled: 1 }; // Default to enabling registration
+        } else {
+          // 如果请求失败，返回默认配置
+          return { registerEnabled: 1 }; // Default to enabling registration
+        }
+      } catch (error) {
+        // 如果API调用失败（比如未登录），返回默认配置
+        return { registerEnabled: 1 }; // Default to enabling registration
+      }
     },
+    retry: false, // 不重试，避免重复的错误请求
+    refetchOnWindowFocus: false, // 不在窗口聚焦时重新获取
+    staleTime: 5 * 60 * 1000, // 5分钟内不重新获取
   });
 
   return { config: data, loading: isLoading };
@@ -26,16 +47,47 @@ export const useInterfaceConfig = () => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ['interfaceConfig'],
     queryFn: async () => {
-      const { data = {} } = await userService.getInterfaceConfig();
-      return (
-        data.data || {
+      try {
+        // 直接使用 request 而不是 userService，以便传递特殊标记
+        const response = await fetch('/v1/system/interface/config', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        
+        if (response.ok) {
+          const { data = {} } = await response.json();
+          return (
+            data.data || {
+              logo: '',
+              favicon: '',
+              login_logo: '',
+              login_welcome_text: '欢迎使用 RAGForge\n智能知识管理与AI助手平台',
+            }
+          );
+        } else {
+          // 如果请求失败，返回默认配置
+          return {
+            logo: '',
+            favicon: '',
+            login_logo: '',
+            login_welcome_text: '欢迎使用 RAGForge\n智能知识管理与AI助手平台',
+          };
+        }
+      } catch (error) {
+        // 如果API调用失败（比如未登录），返回默认配置
+        return {
           logo: '',
           favicon: '',
           login_logo: '',
           login_welcome_text: '欢迎使用 RAGForge\n智能知识管理与AI助手平台',
-        }
-      );
+        };
+      }
     },
+    retry: false, // 不重试，避免重复的错误请求
+    refetchOnWindowFocus: false, // 不在窗口聚焦时重新获取
+    staleTime: 5 * 60 * 1000, // 5分钟内不重新获取
   });
 
   return { config: data, loading: isLoading, refetch };
