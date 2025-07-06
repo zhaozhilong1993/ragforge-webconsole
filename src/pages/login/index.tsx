@@ -1,9 +1,9 @@
 import logoWithText from '@/assets/logo-with-text.png';
 import { useLogin, useRegister } from '@/hooks/login-hooks';
-import { useInterfaceConfig, useSystemConfig } from '@/hooks/system-hooks';
+import { useSystemConfig } from '@/hooks/system-hooks';
 import { rsaPsw } from '@/utils';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'umi';
@@ -17,7 +17,6 @@ const Login = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'login' });
   const loading = signLoading || registerLoading;
   const { config } = useSystemConfig();
-  const { config: interfaceConfig } = useInterfaceConfig();
   const registerEnabled = config?.registerEnabled !== 0;
   const [form] = Form.useForm();
 
@@ -59,29 +58,19 @@ const Login = () => {
     }
   };
 
-  // 动态logo URL
-  const loginLogoUrl = interfaceConfig?.login_logo || logoWithText;
-  const welcomeText =
-    interfaceConfig?.login_welcome_text ||
-    '欢迎使用 RAGForge\n智能知识管理与AI助手平台';
-  const loginTitle = interfaceConfig?.login_title || '欢迎使用 RAGForge';
-
   return (
     <div className={styles.loginRoot}>
       <div className={styles.leftBrand}>
         <div className={styles.brandContent}>
           <div className={styles.logoCircle}>
             <img
-              src={loginLogoUrl}
+              src={logoWithText}
               alt="企业知识库LOGO"
               className={styles.logoImg}
             />
           </div>
-          <h2 className={styles.brandTitle}>{loginTitle}</h2>
-          <p className={styles.brandDesc}>{welcomeText.split('\n')[0]}</p>
-          {welcomeText.split('\n').length > 1 && (
-            <p className={styles.brandDesc}>{welcomeText.split('\n')[1]}</p>
-          )}
+          <h2 className={styles.brandTitle}>欢迎使用 RAGFlow</h2>
+          <p className={styles.brandDesc}>智能知识管理与AI助手平台</p>
         </div>
       </div>
       <div className={styles.rightForm}>
@@ -128,28 +117,42 @@ const Login = () => {
                 size="large"
                 placeholder={t('passwordPlaceholder')}
                 prefix={<LockOutlined />}
+                onPressEnter={onCheck}
               />
             </Form.Item>
-            <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                size="large"
-                className={styles.loginButton}
-                onClick={onCheck}
-                loading={loading}
-                block
-              >
-                {title === 'login' ? t('login') : t('register')}
-              </Button>
-            </Form.Item>
-            {registerEnabled && (
-              <div className={styles.switchTip}>
-                <a onClick={changeTitle}>
-                  {title === 'login' ? t('register') : t('login')}
-                </a>
-              </div>
+            {title === 'login' && (
+              <Form.Item name="remember" valuePropName="checked">
+                <Checkbox> {t('rememberMe')}</Checkbox>
+              </Form.Item>
             )}
+            <Button
+              type="primary"
+              block
+              size="large"
+              onClick={onCheck}
+              loading={loading}
+              className={styles.loginButton}
+            >
+              {title === 'login' ? t('login') : t('continue')}
+            </Button>
+            <div className={styles.switchTip}>
+              {title === 'login' && registerEnabled && (
+                <span>
+                  {t('signInTip')}
+                  <Button type="link" onClick={changeTitle}>
+                    {t('signUp')}
+                  </Button>
+                </span>
+              )}
+              {title === 'register' && (
+                <span>
+                  {t('signUpTip')}
+                  <Button type="link" onClick={changeTitle}>
+                    {t('login')}
+                  </Button>
+                </span>
+              )}
+            </div>
           </Form>
         </div>
       </div>

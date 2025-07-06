@@ -1,4 +1,4 @@
-import { RAGForgeNodeType } from '@/interfaces/database/flow';
+import { RAGFlowNodeType } from '@/interfaces/database/flow';
 import { OnBeforeDelete } from '@xyflow/react';
 import { Operator } from '../constant';
 import useGraphStore from '../store';
@@ -9,7 +9,7 @@ export function useBeforeDelete() {
   const getOperatorTypeFromId = useGraphStore(
     (state) => state.getOperatorTypeFromId,
   );
-  const handleBeforeDelete: OnBeforeDelete<RAGForgeNodeType> = async ({
+  const handleBeforeDelete: OnBeforeDelete<RAGFlowNodeType> = async ({
     nodes, // Nodes to be deleted
     edges, // Edges to be deleted
   }) => {

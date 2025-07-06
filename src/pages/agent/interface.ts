@@ -1,17 +1,17 @@
-import { RAGForgeNodeType } from '@/interfaces/database/flow';
+import { RAGFlowNodeType } from '@/interfaces/database/flow';
 import { FormInstance } from 'antd';
 import { UseFormReturn } from 'react-hook-form';
 
 export interface IOperatorForm {
   onValuesChange?(changedValues: any, values: any): void;
   form?: FormInstance;
-  node?: RAGForgeNodeType;
+  node?: RAGFlowNodeType;
   nodeId?: string;
 }
 
 export interface INextOperatorForm {
   form: UseFormReturn;
-  node?: RAGForgeNodeType;
+  node?: RAGFlowNodeType;
   nodeId?: string;
 }
 

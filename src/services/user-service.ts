@@ -24,9 +24,6 @@ const {
   createSystemToken,
   getSystemConfig,
   setLangfuseConfig,
-  getInterfaceConfig,
-  saveInterfaceConfig,
-  uploadInterfaceFile,
 } = api;
 
 const methods = {
@@ -121,18 +118,6 @@ const methods = {
   deleteLangfuseConfig: {
     url: setLangfuseConfig,
     method: 'delete',
-  },
-  getInterfaceConfig: {
-    url: getInterfaceConfig,
-    method: 'get',
-  },
-  saveInterfaceConfig: {
-    url: saveInterfaceConfig,
-    method: 'post',
-  },
-  uploadInterfaceFile: {
-    url: uploadInterfaceFile,
-    method: 'post',
   },
 } as const;
 

@@ -156,8 +156,8 @@ const EmbedModal = ({
       <Link
         href={
           isAgent
-            ? 'https://ragforge.io/docs/dev/http_api_reference#create-session-with-agent'
-            : 'https://ragforge.io/docs/dev/http_api_reference#create-session-with-chat-assistant'
+            ? 'https://ragflow.io/docs/dev/http_api_reference#create-session-with-agent'
+            : 'https://ragflow.io/docs/dev/http_api_reference#create-session-with-chat-assistant'
         }
         target="_blank"
       >

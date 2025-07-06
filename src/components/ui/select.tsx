@@ -175,20 +175,20 @@ export {
   SelectValue,
 };
 
-export type RAGForgeSelectOptionType = {
+export type RAGFlowSelectOptionType = {
   label: React.ReactNode;
   value: string;
   disabled?: boolean;
 };
 
-export type RAGForgeSelectGroupOptionType = {
+export type RAGFlowSelectGroupOptionType = {
   label: React.ReactNode;
-  options: RAGForgeSelectOptionType[];
+  options: RAGFlowSelectOptionType[];
 };
 
-export type RAGForgeSelectProps = Partial<ControllerRenderProps> & {
+export type RAGFlowSelectProps = Partial<ControllerRenderProps> & {
   FormControlComponent?: typeof FormControl;
-  options?: (RAGForgeSelectOptionType | RAGForgeSelectGroupOptionType)[];
+  options?: (RAGFlowSelectOptionType | RAGFlowSelectGroupOptionType)[];
   allowClear?: boolean;
   placeholder?: React.ReactNode;
   contentProps?: React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>;
@@ -210,9 +210,9 @@ export type RAGForgeSelectProps = Partial<ControllerRenderProps> & {
  * }
  * @return {*}
  */
-export const RAGForgeSelect = forwardRef<
+export const RAGFlowSelect = forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
-  RAGForgeSelectProps
+  RAGFlowSelectProps
 >(function (
   {
     value: initialValue,
@@ -272,7 +272,7 @@ export const RAGForgeSelect = forwardRef<
           if ('value' in o) {
             return (
               <SelectItem
-                value={o.value as RAGForgeSelectOptionType['value']}
+                value={o.value as RAGFlowSelectOptionType['value']}
                 key={o.value}
                 disabled={o.disabled}
               >
@@ -297,4 +297,4 @@ export const RAGForgeSelect = forwardRef<
   );
 });
 
-RAGForgeSelect.displayName = 'RAGForgeSelect';
+RAGFlowSelect.displayName = 'RAGFlowSelect';

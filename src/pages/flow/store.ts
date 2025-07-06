@@ -1,4 +1,4 @@
-import { RAGForgeNodeType } from '@/interfaces/database/flow';
+import { RAGFlowNodeType } from '@/interfaces/database/flow';
 import type {} from '@redux-devtools/extension';
 import {
   Connection,
@@ -30,25 +30,25 @@ import {
 } from './utils';
 
 export type RFState = {
-  nodes: RAGForgeNodeType[];
+  nodes: RAGFlowNodeType[];
   edges: Edge[];
   selectedNodeIds: string[];
   selectedEdgeIds: string[];
   clickedNodeId: string; // currently selected node
-  onNodesChange: OnNodesChange<RAGForgeNodeType>;
+  onNodesChange: OnNodesChange<RAGFlowNodeType>;
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
-  setNodes: (nodes: RAGForgeNodeType[]) => void;
+  setNodes: (nodes: RAGFlowNodeType[]) => void;
   setEdges: (edges: Edge[]) => void;
   setEdgesByNodeId: (nodeId: string, edges: Edge[]) => void;
   updateNodeForm: (
     nodeId: string,
     values: any,
     path?: (string | number)[],
-  ) => RAGForgeNodeType[];
+  ) => RAGFlowNodeType[];
   onSelectionChange: OnSelectionChangeFunc;
-  addNode: (nodes: RAGForgeNodeType) => void;
-  getNode: (id?: string | null) => RAGForgeNodeType | undefined;
+  addNode: (nodes: RAGFlowNodeType) => void;
+  getNode: (id?: string | null) => RAGFlowNodeType | undefined;
   addEdge: (connection: Connection) => void;
   getEdge: (id: string) => Edge | undefined;
   updateFormDataOnConnect: (connection: Connection) => void;
@@ -65,7 +65,7 @@ export type RFState = {
   deleteNodeById: (id: string) => void;
   deleteIterationNodeById: (id: string) => void;
   deleteEdgeBySourceAndSourceHandle: (connection: Partial<Connection>) => void;
-  findNodeByName: (operatorName: Operator) => RAGForgeNodeType | undefined;
+  findNodeByName: (operatorName: Operator) => RAGFlowNodeType | undefined;
   updateMutableNodeFormItem: (id: string, field: string, value: any) => void;
   getOperatorTypeFromId: (id?: string | null) => string | undefined;
   getParentIdById: (id?: string | null) => string | undefined;
@@ -78,7 +78,7 @@ export type RFState = {
 const useGraphStore = create<RFState>()(
   devtools(
     immer((set, get) => ({
-      nodes: [] as RAGForgeNodeType[],
+      nodes: [] as RAGFlowNodeType[],
       edges: [] as Edge[],
       selectedNodeIds: [] as string[],
       selectedEdgeIds: [] as string[],
@@ -110,7 +110,7 @@ const useGraphStore = create<RFState>()(
           selectedNodeIds: nodes.map((x) => x.id),
         });
       },
-      setNodes: (nodes: RAGForgeNodeType[]) => {
+      setNodes: (nodes: RAGFlowNodeType[]) => {
         set({ nodes });
       },
       setEdges: (edges: Edge[]) => {
@@ -162,7 +162,7 @@ const useGraphStore = create<RFState>()(
           ]);
         }
       },
-      addNode: (node: RAGForgeNodeType) => {
+      addNode: (node: RAGFlowNodeType) => {
         set({ nodes: get().nodes.concat(node) });
       },
       getNode: (id?: string | null) => {
@@ -260,7 +260,7 @@ const useGraphStore = create<RFState>()(
         const { getNode, generateNodeName, nodes } = get();
         const node = getNode(id);
 
-        const iterationNode: RAGForgeNodeType = {
+        const iterationNode: RAGFlowNodeType = {
           ...(node || {}),
           data: {
             ...(node?.data || { label: Operator.Iteration, form: {} }),

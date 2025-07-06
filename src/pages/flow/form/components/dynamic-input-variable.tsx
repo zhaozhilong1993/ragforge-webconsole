@@ -1,4 +1,4 @@
-import { RAGForgeNodeType } from '@/interfaces/database/flow';
+import { RAGFlowNodeType } from '@/interfaces/database/flow';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Collapse, Flex, Form, Input, Select } from 'antd';
 import { PropsWithChildren, useCallback } from 'react';
@@ -8,7 +8,7 @@ import { useBuildComponentIdSelectOptions } from '../../hooks/use-get-begin-quer
 import styles from './index.less';
 
 interface IProps {
-  node?: RAGForgeNodeType;
+  node?: RAGFlowNodeType;
 }
 
 enum VariableType {

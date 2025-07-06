@@ -122,7 +122,7 @@ export enum FileMimeType {
   Json = 'application/json',
 }
 
-export const Domain = 'demo.ragforge.io';
+export const Domain = 'demo.ragflow.io';
 
 //#region file preview
 export const Images = [
@@ -145,7 +145,7 @@ export const SupportedPreviewDocumentTypes = [...ExceptiveType];
 //#endregion
 
 export enum Platform {
-  RAGForge = 'RAGForge',
+  RAGFlow = 'RAGFlow',
   Dify = 'Dify',
   FastGPT = 'FastGPT',
   Coze = 'Coze',

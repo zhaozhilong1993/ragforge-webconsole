@@ -1,4 +1,4 @@
-import { RAGForgeNodeType } from '@/interfaces/database/flow';
+import { RAGFlowNodeType } from '@/interfaces/database/flow';
 import { DefaultOptionType } from 'antd/es/select';
 import get from 'lodash/get';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -49,7 +49,7 @@ export const useBuildComponentIdSelectOptions = (
 
   // Limit the nodes inside iteration to only reference peer nodes with the same parentId and other external nodes other than their parent nodes
   const filterChildNodesToSameParentOrExternal = useCallback(
-    (node: RAGForgeNodeType) => {
+    (node: RAGFlowNodeType) => {
       // Node inside iteration
       if (parentId) {
         return (

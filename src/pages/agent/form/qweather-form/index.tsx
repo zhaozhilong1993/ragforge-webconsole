@@ -7,7 +7,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { RAGForgeSelect } from '@/components/ui/select';
+import { RAGFlowSelect } from '@/components/ui/select';
 import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -90,10 +90,10 @@ const QWeatherForm = ({ form, node }: INextOperatorForm) => {
             <FormItem>
               <FormLabel>{t('flow.lang')}</FormLabel>
               <FormControl>
-                <RAGForgeSelect
+                <RAGFlowSelect
                   {...field}
                   options={qWeatherLangOptions}
-                ></RAGForgeSelect>
+                ></RAGFlowSelect>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -106,10 +106,10 @@ const QWeatherForm = ({ form, node }: INextOperatorForm) => {
             <FormItem>
               <FormLabel>{t('flow.type')}</FormLabel>
               <FormControl>
-                <RAGForgeSelect
+                <RAGFlowSelect
                   {...field}
                   options={qWeatherTypeOptions}
-                ></RAGForgeSelect>
+                ></RAGFlowSelect>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -122,10 +122,10 @@ const QWeatherForm = ({ form, node }: INextOperatorForm) => {
             <FormItem>
               <FormLabel>{t('flow.userType')}</FormLabel>
               <FormControl>
-                <RAGForgeSelect
+                <RAGFlowSelect
                   {...field}
                   options={qWeatherUserTypeOptions}
-                ></RAGForgeSelect>
+                ></RAGFlowSelect>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -139,10 +139,10 @@ const QWeatherForm = ({ form, node }: INextOperatorForm) => {
               <FormItem>
                 <FormLabel>{t('flow.timePeriod')}</FormLabel>
                 <FormControl>
-                  <RAGForgeSelect
+                  <RAGFlowSelect
                     {...field}
                     options={getQWeatherTimePeriodOptions()}
-                  ></RAGForgeSelect>
+                  ></RAGFlowSelect>
                 </FormControl>
                 <FormMessage />
               </FormItem>

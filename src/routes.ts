@@ -7,6 +7,10 @@ export enum Routes {
   Agent = '/agent',
   AgentTemplates = '/agent-templates',
   Agents = '/agents',
+  Searches = '/next-searches',
+  Search = '/next-search',
+  Chats = '/next-chats',
+  Chat = '/next-chat',
   Files = '/files',
   ProfileSetting = '/profile-setting',
   DatasetTesting = '/testing',
@@ -25,7 +29,11 @@ const routes = [
     component: '@/pages/login',
     layout: false,
   },
-
+  {
+    path: '/login-next',
+    component: '@/pages/login-next',
+    layout: false,
+  },
   {
     path: '/chat/share',
     component: '@/pages/chat/share',
@@ -167,7 +175,38 @@ const routes = [
       },
     ],
   },
-
+  {
+    path: Routes.Chats,
+    layout: false,
+    component: '@/layouts/next',
+    routes: [
+      {
+        path: Routes.Chats,
+        component: `@/pages${Routes.Chats}`,
+      },
+    ],
+  },
+  {
+    path: Routes.Chat,
+    layout: false,
+    component: `@/pages${Routes.Chats}/chat`,
+  },
+  {
+    path: Routes.Searches,
+    layout: false,
+    component: '@/layouts/next',
+    routes: [
+      {
+        path: Routes.Searches,
+        component: `@/pages${Routes.Searches}`,
+      },
+    ],
+  },
+  {
+    path: Routes.Search,
+    layout: false,
+    component: `@/pages${Routes.Search}`,
+  },
   {
     path: Routes.Agents,
     layout: false,

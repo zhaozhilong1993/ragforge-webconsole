@@ -3,7 +3,7 @@ import { TavilyItem } from '@/components/tavily-item';
 import { useTranslate } from '@/hooks/common-hooks';
 import { useFetchTenantInfo } from '@/hooks/user-setting-hooks';
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Form, Input, message, Select, Switch, Upload } from 'antd';
+import { Form, Input, message, Select, Switch, Upload } from 'antd';
 import classNames from 'classnames';
 import { useCallback } from 'react';
 import { ISegmentedContentProps } from '../interface';
@@ -55,23 +55,10 @@ const AssistantSetting = ({
   );
 
   const uploadButton = (
-    <Button
-      type="dashed"
-      style={{
-        width: '100%',
-        height: 80,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 0,
-      }}
-      icon={<PlusOutlined style={{ fontSize: 20, marginBottom: 4 }} />}
-    >
-      <div style={{ textAlign: 'center', width: '100%', fontSize: 14 }}>
-        {t('upload', { keyPrefix: 'common' })}
-      </div>
-    </Button>
+    <button style={{ border: 0, background: 'none' }} type="button">
+      <PlusOutlined />
+      <div style={{ marginTop: 8 }}>{t('upload', { keyPrefix: 'common' })}</div>
+    </button>
   );
 
   return (
@@ -101,7 +88,6 @@ const AssistantSetting = ({
           maxCount={1}
           beforeUpload={() => false}
           showUploadList={{ showPreviewIcon: false, showRemoveIcon: false }}
-          className="avatar-upload-centered"
         >
           {show ? uploadButton : null}
         </Upload>

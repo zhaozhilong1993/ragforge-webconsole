@@ -3,11 +3,8 @@ import { useTheme } from '@/components/theme-provider';
 import { useSetModalState, useTranslate } from '@/hooks/common-hooks';
 import { useSelectLlmList } from '@/hooks/llm-hooks';
 import {
-  useInterfaceConfig,
-  useSaveInterfaceConfig,
-  useUploadInterfaceFile,
-} from '@/hooks/system-hooks';
-import {
+  DatabaseOutlined,
+  HddOutlined,
   PictureOutlined,
   PlusOutlined,
   SafetyCertificateOutlined,
@@ -34,7 +31,7 @@ import {
   Typography,
   Upload,
 } from 'antd';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import SettingTitle from '../user-setting/components/setting-title';
 
 const { Content, Sider } = Layout;
@@ -100,6 +97,138 @@ const ModelSettings = () => {
         )}
       />
     </Spin>
+  );
+};
+
+const DatabaseSettings = () => {
+  const [databaseType, setDatabaseType] = useState('mysql');
+  const [damengForm] = Form.useForm();
+
+  const handleDatabaseTypeChange = (value: string) => {
+    setDatabaseType(value);
+  };
+
+  const handleDamengConnection = () => {
+    damengForm.validateFields().then((values) => {
+      console.log('Dameng connection values:', values);
+      // Here you would typically make an API call to test the connection
+    });
+  };
+
+  return (
+    <Card title="数据库管理">
+      <Form layout="vertical">
+        <Form.Item label="数据库类型">
+          <Radio.Group
+            value={databaseType}
+            onChange={(e) => handleDatabaseTypeChange(e.target.value)}
+          >
+            <Radio value="mysql">MySQL</Radio>
+            <Radio value="dameng">达梦数据库</Radio>
+          </Radio.Group>
+        </Form.Item>
+
+        {databaseType === 'mysql' && (
+          <Card
+            title="MySQL 连接信息"
+            size="small"
+            style={{ marginTop: 16 }}
+            className="bg-gray-50"
+            extra={<Tag color="green">当前使用</Tag>}
+          >
+            <Row gutter={16}>
+              <Col span={12}>
+                <div style={{ marginBottom: 12 }}>
+                  <Text strong>地址：</Text>
+                  <Text>localhost</Text>
+                </div>
+                <div style={{ marginBottom: 12 }}>
+                  <Text strong>端口：</Text>
+                  <Text>3306</Text>
+                </div>
+              </Col>
+              <Col span={12}>
+                <div style={{ marginBottom: 12 }}>
+                  <Text strong>用户名：</Text>
+                  <Text>root</Text>
+                </div>
+                <div style={{ marginBottom: 12 }}>
+                  <Text strong>密码：</Text>
+                  <Text type="secondary">••••••••</Text>
+                </div>
+              </Col>
+            </Row>
+            <div style={{ marginTop: 16 }}>
+              <Text strong>数据库名：</Text>
+              <Text>ragflow</Text>
+            </div>
+          </Card>
+        )}
+
+        {databaseType === 'dameng' && (
+          <Card
+            title="达梦数据库连接配置"
+            size="small"
+            style={{ marginTop: 16 }}
+          >
+            <Form form={damengForm} layout="vertical">
+              <Row gutter={16}>
+                <Col span={12}>
+                  <Form.Item
+                    name="host"
+                    label="地址"
+                    rules={[{ required: true, message: '请输入数据库地址' }]}
+                  >
+                    <Input placeholder="请输入数据库地址" />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item
+                    name="port"
+                    label="端口"
+                    rules={[{ required: true, message: '请输入端口号' }]}
+                  >
+                    <Input placeholder="请输入端口号" />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={16}>
+                <Col span={12}>
+                  <Form.Item
+                    name="username"
+                    label="用户名"
+                    rules={[{ required: true, message: '请输入用户名' }]}
+                  >
+                    <Input placeholder="请输入用户名" />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item
+                    name="password"
+                    label="密码"
+                    rules={[{ required: true, message: '请输入密码' }]}
+                  >
+                    <Input.Password placeholder="请输入密码" />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Form.Item
+                name="database"
+                label="数据库名"
+                rules={[{ required: true, message: '请输入数据库名' }]}
+              >
+                <Input placeholder="请输入数据库名" />
+              </Form.Item>
+              <Form.Item>
+                <Button type="primary" onClick={handleDamengConnection}>
+                  连接确认
+                </Button>
+              </Form.Item>
+            </Form>
+          </Card>
+        )}
+      </Form>
+    </Card>
   );
 };
 
@@ -197,112 +326,15 @@ const OcrSettings = () => {
 };
 
 const InterfaceSettings = () => {
-  const { config: interfaceConfig } = useInterfaceConfig();
-  const { saveInterfaceConfig, loading: saveLoading } =
-    useSaveInterfaceConfig();
-  const { uploadInterfaceFile, loading: uploadLoading } =
-    useUploadInterfaceFile();
-
   const [logoFileList, setLogoFileList] = useState([]);
   const [faviconFileList, setFaviconFileList] = useState([]);
   const [loginLogoFileList, setLoginLogoFileList] = useState([]);
-  const [welcomeText, setWelcomeText] = useState('');
-  const [appName, setAppName] = useState('');
-  const [loginTitle, setLoginTitle] = useState('');
-
-  useEffect(() => {
-    if (interfaceConfig) {
-      setLogoFileList(
-        interfaceConfig.logo
-          ? [
-              {
-                uid: '-1',
-                name: 'logo.png',
-                status: 'done',
-                url: interfaceConfig.logo,
-              },
-            ]
-          : [],
-      );
-      setFaviconFileList(
-        interfaceConfig.favicon
-          ? [
-              {
-                uid: '-1',
-                name: 'favicon.ico',
-                status: 'done',
-                url: interfaceConfig.favicon,
-              },
-            ]
-          : [],
-      );
-      setLoginLogoFileList(
-        interfaceConfig.login_logo
-          ? [
-              {
-                uid: '-1',
-                name: 'login-logo.png',
-                status: 'done',
-                url: interfaceConfig.login_logo,
-              },
-            ]
-          : [],
-      );
-      setWelcomeText(
-        interfaceConfig.login_welcome_text ||
-          '欢迎使用 RAGForge\n智能知识管理与AI助手平台',
-      );
-      setAppName(interfaceConfig.app_name || 'RAGForge');
-      setLoginTitle(interfaceConfig.login_title || '欢迎使用 RAGForge');
-    }
-  }, [interfaceConfig]);
 
   const handleUploadChange =
-    (setter, type) =>
+    (setter) =>
     ({ fileList }) => {
       setter(fileList);
-
-      // 如果有新文件上传，自动上传到服务器
-      if (fileList.length > 0 && fileList[0].originFileObj) {
-        const file = fileList[0].originFileObj;
-        uploadInterfaceFile({ file, type }).then((result) => {
-          if (result.code === 0) {
-            // 更新文件列表为服务器返回的数据
-            setter([
-              {
-                uid: '-1',
-                name: file.name,
-                status: 'done',
-                url: result.data.url,
-              },
-            ]);
-          }
-        });
-      }
     };
-
-  const handleSave = async () => {
-    try {
-      const configData = {
-        logo: logoFileList.length > 0 ? logoFileList[0].url : '',
-        favicon: faviconFileList.length > 0 ? faviconFileList[0].url : '',
-        login_logo:
-          loginLogoFileList.length > 0 ? loginLogoFileList[0].url : '',
-        login_welcome_text: welcomeText,
-        app_name: appName,
-        login_title: loginTitle,
-      };
-
-      await saveInterfaceConfig(configData);
-
-      // 保存成功后，刷新页面以应用新配置
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-    } catch (error) {
-      console.error('保存失败:', error);
-    }
-  };
 
   const uploadButton = (
     <div>
@@ -310,10 +342,6 @@ const InterfaceSettings = () => {
       <div style={{ marginTop: 8 }}>上传</div>
     </div>
   );
-
-  if (saveLoading || uploadLoading) {
-    return <Spin size="large" />;
-  }
 
   return (
     <div style={{ maxWidth: 1000 }}>
@@ -335,10 +363,9 @@ const InterfaceSettings = () => {
             <Upload
               listType="picture-card"
               fileList={logoFileList}
-              onChange={handleUploadChange(setLogoFileList, 'logo')}
+              onChange={handleUploadChange(setLogoFileList)}
               maxCount={1}
               beforeUpload={() => false}
-              accept="image/*"
             >
               {logoFileList.length === 0 && uploadButton}
             </Upload>
@@ -355,31 +382,14 @@ const InterfaceSettings = () => {
             <Upload
               listType="picture-card"
               fileList={faviconFileList}
-              onChange={handleUploadChange(setFaviconFileList, 'favicon')}
+              onChange={handleUploadChange(setFaviconFileList)}
               maxCount={1}
               beforeUpload={() => false}
-              accept=".ico,image/*"
             >
               {faviconFileList.length === 0 && uploadButton}
             </Upload>
             <Typography.Text type="secondary">
               建议尺寸 32 * 32, .ico格式
-            </Typography.Text>
-          </Col>
-        </Row>
-        <Row align="middle" style={{ padding: '12px 0' }}>
-          <Col span={6}>
-            <Typography.Text strong>应用名称</Typography.Text>
-          </Col>
-          <Col span={18}>
-            <Input
-              value={appName}
-              onChange={(e) => setAppName(e.target.value)}
-              style={{ maxWidth: 400 }}
-              placeholder="RAGForge"
-            />
-            <Typography.Text type="secondary">
-              显示在页面头部和浏览器标题中的应用名称
             </Typography.Text>
           </Col>
         </Row>
@@ -400,10 +410,9 @@ const InterfaceSettings = () => {
             <Upload
               listType="picture-card"
               fileList={loginLogoFileList}
-              onChange={handleUploadChange(setLoginLogoFileList, 'login_logo')}
+              onChange={handleUploadChange(setLoginLogoFileList)}
               maxCount={1}
               beforeUpload={() => false}
-              accept="image/*"
             >
               {loginLogoFileList.length === 0 && uploadButton}
             </Upload>
@@ -419,42 +428,40 @@ const InterfaceSettings = () => {
           <Col span={18}>
             <Input.TextArea
               rows={4}
-              value={welcomeText}
-              onChange={(e) => setWelcomeText(e.target.value)}
+              defaultValue={'欢迎使用 RAGFlow\n智能知识管理与AI助手平台'}
               style={{ maxWidth: 400 }}
-              placeholder="欢迎使用 RAGForge\n智能知识管理与AI助手平台"
             />
-          </Col>
-        </Row>
-        <Row align="middle" style={{ padding: '12px 0' }}>
-          <Col span={6}>
-            <Typography.Text strong>登录页主标题</Typography.Text>
-          </Col>
-          <Col span={18}>
-            <Input
-              value={loginTitle}
-              onChange={(e) => setLoginTitle(e.target.value)}
-              style={{ maxWidth: 400 }}
-              placeholder="欢迎使用 RAGForge"
-            />
-            <Typography.Text type="secondary">
-              登录页面显示的主要标题
-            </Typography.Text>
           </Col>
         </Row>
       </Card>
 
       <Flex justify="flex-start" style={{ marginTop: 32 }}>
-        <Button
-          type="primary"
-          size="large"
-          onClick={handleSave}
-          loading={saveLoading || uploadLoading}
-        >
+        <Button type="primary" size="large">
           保存更改
         </Button>
       </Flex>
     </div>
+  );
+};
+
+const StorageSettings = () => {
+  return (
+    <Card title="存储管理">
+      <Form layout="vertical">
+        <Form.Item label="存储加密方式">
+          <Radio.Group>
+            <Radio value="none">不加密</Radio>
+            <Radio value="aes256">AES-256</Radio>
+          </Radio.Group>
+        </Form.Item>
+        <Form.Item label="备份地址">
+          <Input placeholder="请输入备份地址" />
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary">保存</Button>
+        </Form.Item>
+      </Form>
+    </Card>
   );
 };
 
@@ -482,14 +489,24 @@ const LicenseSettings = () => {
 };
 
 const SystemManagementPage = () => {
-  const [selectedKey, setSelectedKey] = useState('license');
+  const [selectedKey, setSelectedKey] = useState('database');
 
   const renderContent = () => {
     switch (selectedKey) {
+      case 'database':
+        return <DatabaseSettings />;
+      case 'ocr':
+        return <OcrSettings />;
+      case 'interface':
+        return <InterfaceSettings />;
+      case 'storage':
+        return <StorageSettings />;
       case 'license':
         return <LicenseSettings />;
+      case 'model':
+        return <ModelSettings />;
       default:
-        return <LicenseSettings />;
+        return <DatabaseSettings />;
     }
   };
 
@@ -502,6 +519,18 @@ const SystemManagementPage = () => {
           onClick={({ key }) => setSelectedKey(key)}
           style={{ height: '100%', borderRight: 0 }}
         >
+          <Menu.Item key="database" icon={<DatabaseOutlined />}>
+            数据库管理
+          </Menu.Item>
+          <Menu.Item key="ocr" icon={<ScanOutlined />}>
+            OCR管理
+          </Menu.Item>
+          <Menu.Item key="interface" icon={<PictureOutlined />}>
+            界面管理
+          </Menu.Item>
+          <Menu.Item key="storage" icon={<HddOutlined />}>
+            存储管理
+          </Menu.Item>
           <Menu.Item key="license" icon={<SafetyCertificateOutlined />}>
             授权管理
           </Menu.Item>

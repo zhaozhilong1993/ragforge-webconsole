@@ -123,11 +123,6 @@ export default {
   getSystemConfig: `${api_host}/system/config`,
   setLangfuseConfig: `${api_host}/langfuse/api_key`,
 
-  // interface config
-  getInterfaceConfig: `${api_host}/system/interface/config`,
-  saveInterfaceConfig: `${api_host}/system/interface/config`,
-  uploadInterfaceFile: `${api_host}/system/interface/upload`,
-
   // flow
   listTemplates: `${api_host}/canvas/templates`,
   listCanvas: `${api_host}/canvas/list`,

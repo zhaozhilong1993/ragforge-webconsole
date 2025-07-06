@@ -6,7 +6,7 @@ import { SwitchElseTo } from '../../constant';
 import {
   ICategorizeItemResult,
   ISwitchCondition,
-  RAGForgeNodeType,
+  RAGFlowNodeType,
 } from '@/interfaces/database/flow';
 import { generateSwitchHandleText } from '../../utils';
 
@@ -15,7 +15,7 @@ export const useBuildCategorizeHandlePositions = ({
   id,
 }: {
   id: string;
-  data: RAGForgeNodeType['data'];
+  data: RAGFlowNodeType['data'];
 }) => {
   const updateNodeInternals = useUpdateNodeInternals();
 
@@ -55,7 +55,7 @@ export const useBuildSwitchHandlePositions = ({
   id,
 }: {
   id: string;
-  data: RAGForgeNodeType['data'];
+  data: RAGFlowNodeType['data'];
 }) => {
   const updateNodeInternals = useUpdateNodeInternals();
 

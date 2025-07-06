@@ -1,6 +1,6 @@
-import { RAGForgeNodeType } from '@/interfaces/database/flow';
+import { RAGFlowNodeType } from '@/interfaces/database/flow';
 import { createContext } from 'react';
 
-export const FlowFormContext = createContext<RAGForgeNodeType | undefined>(
+export const FlowFormContext = createContext<RAGFlowNodeType | undefined>(
   undefined,
 );

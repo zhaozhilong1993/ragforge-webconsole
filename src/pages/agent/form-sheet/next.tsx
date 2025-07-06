@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/sheet';
 import { useTranslate } from '@/hooks/common-hooks';
 import { IModalProps } from '@/interfaces/common';
-import { RAGForgeNodeType } from '@/interfaces/database/flow';
+import { RAGFlowNodeType } from '@/interfaces/database/flow';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { get, isPlainObject, lowerFirst } from 'lodash';
@@ -27,7 +27,7 @@ import SingleDebugDrawer from './single-debug-drawer';
 import { useFormConfigMap } from './use-form-config-map';
 
 interface IProps {
-  node?: RAGForgeNodeType;
+  node?: RAGFlowNodeType;
   singleDebugDrawerVisible: IModalProps<any>['visible'];
   hideSingleDebugDrawer: IModalProps<any>['hideModal'];
   showSingleDebugDrawer: IModalProps<any>['showModal'];

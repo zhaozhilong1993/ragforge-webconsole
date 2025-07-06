@@ -22,7 +22,7 @@ const Circle = ({ children, ...restProps }: React.PropsWithChildren) => {
 };
 
 const handleGithubCLick = () => {
-  window.open('https://github.com/zhaozhilong1993/ragforge', 'target');
+  window.open('https://github.com/infiniflow/ragflow', 'target');
 };
 
 const RightToolBar = () => {
@@ -59,7 +59,7 @@ const RightToolBar = () => {
     <div className={styled.toolbarWrapper}>
       <Space wrap size={16}>
         <a
-          href="https://www.ragforge.cn"
+          href="https://www.matrixstar.tech/h-col-108.html"
           target="_blank"
           rel="noopener noreferrer"
           style={{
