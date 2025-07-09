@@ -1,8 +1,13 @@
 # 开发环境Dockerfile
-FROM node:18-alpine
+FROM node:18
 
 # 设置工作目录
 WORKDIR /app
+
+# 设置环境变量默认值
+ENV RAGFORGE_BACKEND_API_URL=http://localhost:9380
+ENV NODE_ENV=development
+ENV PORT=3000
 
 # 复制package文件
 COPY package*.json ./
@@ -14,7 +19,7 @@ RUN npm ci
 COPY . .
 
 # 暴露端口
-EXPOSE 9222
+EXPOSE 3000
 
 # 启动开发服务器
 CMD ["npm", "run", "dev"] 
