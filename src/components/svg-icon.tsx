@@ -17,8 +17,9 @@ let routeList: { name: string; value: string }[] = [];
 
 try {
   routeList = importAll(require.context('@/assets/svg', true, /\.svg$/));
+  console.log('SvgIcon: Loaded SVG files:', routeList.map(item => item.name));
 } catch (error) {
-  console.warn(error);
+  console.warn('SvgIcon: Error loading SVG files:', error);
   routeList = [];
 }
 
@@ -31,6 +32,11 @@ interface IProps extends IconComponentProps {
 
 const SvgIcon = ({ name, width, height, imgClass, ...restProps }: IProps) => {
   const ListItem = routeList.find((item) => item.name === name);
+  
+  if (!ListItem) {
+    console.warn(`SvgIcon: Icon "${name}" not found. Available icons:`, routeList.map(item => item.name));
+  }
+  
   return (
     <Icon
       component={() => (
